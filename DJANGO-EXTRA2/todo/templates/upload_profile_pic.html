@@ -1,0 +1,30 @@
+{% extends base.html %}
+
+{% block body %}
+	<div class="container">
+		<h2>Upload Profile Picture</h2>
+		<form id="profile-picture-form" enctype="multipart/form-data">
+			<input type="file" id="profile-picture" name="profile_picture" accept="image/*">
+			<button class="upload-button" type="submit">Upload</button>
+		</form>
+		<div id="profile-picture-preview">
+			<img id="profile-picture-img" src="" alt="Profile Picture" class="profile-picture">
+		</div>
+	</div>
+
+	<script>
+		const profilePictureInput = document.getElementById('profile-picture');
+		const profilePicturePreview = document.getElementById('profile-picture-preview');
+		const profilePictureImg = document.getElementById('profile-picture-img');
+
+		profilePictureInput.addEventListener('change', (e) => {
+			const file = e.target.files[0];
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				profilePictureImg.src = e.target.result;
+				profilePicturePreview.style.display = 'block';
+			};
+			reader.readAsDataURL(file);
+		});
+	</script>
+{% endblock %}
